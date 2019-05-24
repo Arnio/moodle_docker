@@ -99,17 +99,17 @@ cp -r /tmp/ansible/kubernetes $WORKSPACE/
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>sudo cp -r moodlefile/* /var/www/html/moodle
+                  <execCommand>sudo cp -r moodlefile/* /var/www/html
 ansible-playbook /tmp/ansible/web.yml
 docker build -t moodle-devops095 -f  moodle_d/Dockerfile .
-docker tag moodle-devops095 gcr.io/lyrical-chassis-232614/moodle-devops095:0.0.1
+docker tag moodle-devops095 gcr.io/${project}/moodle-devops095:0.0.1
 gcloud auth activate-service-account --key-file /tmp/ansible/.ssh/gcp_devops.json
-gcloud docker -- push gcr.io/lyrical-chassis-232614/moodle-devops095
-gcloud beta container clusters get-credentials moodle-claster --region us-central1 --project lyrical-chassis-232614
-kubectl create secret docker-registry gcr-json-key --docker-server=gcr.io --docker-username=_json_key --docker-password=&quot;$(cat /tmp/ansible/.ssh/gcp-viewer.json)&quot; --docker-email=arnio.if@gmail.com
+gcloud docker -- push gcr.io/${project}/moodle-devops095
+gcloud beta container clusters get-credentials moodle-claster --region ${region} --project ${project}
+kubectl create secret docker-registry gcr-json-key --docker-server=gcr.io --docker-username=_json_key --docker-password=&quot;$(cat /tmp/ansible/.ssh/gcp-viewer.json)&quot; --docker-email=example@example.com
 kubectl patch serviceaccount default -p &apos;{&quot;imagePullSecrets&quot;: [{&quot;name&quot;: &quot;gcr-json-key&quot;}]}&apos;
 kubectl create secret generic cloudsql-instance-credentials --from-file=credentials.json=/tmp/ansible/.ssh/gcp_sql.json
-kubectl create secret generic cloudsql-db-credentials --from-literal=username=root --from-literal=password=moodle123
+kubectl create secret generic cloudsql-db-credentials --from-literal=username=${db_user} --from-literal=password=${db_pass}
 kubectl apply -f kubernetes/deployment-moodle.yml
 kubectl apply -f kubernetes/ingress-moodle.yml
 </execCommand>

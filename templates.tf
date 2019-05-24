@@ -15,14 +15,20 @@ data "template_file" "app_conf" {
     db_name = "${var.db_name}"
     db_user = "${var.user_name}"
     db_pass = "${var.user_password}"
+    global_address = "${google_compute_global_address.my_global_address.address}"
+#    redis_host = "${google_redis_instance.cache.host}"
   }
 }
 data "template_file" "job_moodle" {
   template = "${file("${path.module}/templates/job_moodle.xml.tpl")}"
   
   vars {
-    lb_backend = "${google_compute_global_address.my_global_address.address}"
     project = "${var.project}"
+    region  = "${var.region}"
+    db_user = "${var.user_name}"
+    db_pass = "${var.user_password}"
+    sql_instans_name = "${google_sql_database_instance.instance.name}"
+
   }
 }
 

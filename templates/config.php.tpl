@@ -38,10 +38,10 @@ $CFG = new stdClass();
 // and a username/password created to access it.                         //
 $CFG->dbtype    = 'mysqli';      // 'pgsql', 'mariadb', 'mysqli', 'sqlsrv' or 'oci'
 $CFG->dblibrary = 'native';     // 'native' only at the moment
-$CFG->dbhost    = 'localhost';  // eg 'localhost' or 'db.isp.com' or IP
-$CFG->dbname    = 'moodledb';     // database name, eg moodle
-$CFG->dbuser    = 'root';   // your database username
-$CFG->dbpass    = 'moodle123';   // your database password
+$CFG->dbhost    = '${db_server}';  // eg 'localhost' or 'db.isp.com' or IP
+$CFG->dbname    = '${db_name}';     // database name, eg moodle
+$CFG->dbuser    = '${db_user}';   // your database username
+$CFG->dbpass    = '${db_pass}';   // your database password
 $CFG->prefix    = 'mdl_';       // prefix to use for all table names
 $CFG->dboptions = array(
     'dbpersist' => false,       // should persistent database connections be
@@ -89,7 +89,7 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 // $CFG->wwwroot   = 'http://{{ ansible_eth1.ipv4.address }}';
-$CFG->wwwroot   = 'http://35.244.247.63';
+$CFG->wwwroot   = '${global_address}';
 //=========================================================================
 // 3. DATA FILES LOCATION
 //=========================================================================
@@ -258,7 +258,7 @@ $CFG->admin = 'admin';
 //
 //   Redis session handler (requires redis server and redis extension):
       $CFG->session_handler_class = '\core\session\redis';
-      $CFG->session_redis_host = '10.0.0.4';
+      $CFG->session_redis_host = '10.0.0.5';
       $CFG->session_redis_port = 6379;  // Optional.
       $CFG->session_redis_database = 0;  // Optional, default is db 0.
 //      $CFG->session_redis_auth = '{{ PASSWDDB }}'; // Optional, default is don't set one.

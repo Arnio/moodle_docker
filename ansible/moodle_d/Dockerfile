@@ -11,12 +11,11 @@ RUN yum clean all
 RUN sed -i -e 's/session.save_handler = files/session.save_handler = redis/g' /etc/php.ini && \
     sed -i -e "s+;session.save_path = \"/tmp\"+session.save_path = \"tcp://10.0.0.4:6379\"+g" /etc/php.ini
 
-COPY ./moodlefile ./var/www/html/
+COPY . /var/www/html/
 
-RUN mkdir -p /var/moodledata && chown -R apache:apache /var/moodledata && \
-    sed -i -e 's+DirectoryIndex index.html+DirectoryIndex index.php index.html index.htm+g' /etc/httpd/conf/httpd.conf
+RUN mkdir -p /var/moodledata && chown -R apache:apache /var/moodledata 
 
-RUN /usr/bin/php /var/www/html/moodle/admin/cli/install.php \
+RUN /usr/bin/php /var/www/html/admin/cli/install.php \
       --lang=en \
       --dbtype=mysqli \
       --wwwroot=http://35.244.247.63/ \
@@ -35,7 +34,7 @@ RUN /usr/bin/php /var/www/html/moodle/admin/cli/install.php \
       --allow-unstable \
       --agree-license
 
-COPY ./moodle_d/config.php ./var/www/html/
+COPY /tmp/ansible/files/config.php /var/www/html/
 
 CMD [“/usr/sbin/httpd”, “-D”, “FOREGROUND”]
 
