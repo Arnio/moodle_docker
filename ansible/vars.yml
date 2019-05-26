@@ -11,11 +11,9 @@ maven_path: "{{download_folder}}/apache-maven-3.6.0"
 maven_env_file: /etc/profile.d/maven.sh
 amazon_corretto_jdk_url: https://d1f2yzg3dx5xke.cloudfront.net/java-1.8.0-amazon-corretto-devel-1.8.0_202.b08-1.amzn2.x86_64.rpm
 amazon_corretto_jre_url: https://d1f2yzg3dx5xke.cloudfront.net/java-1.8.0-amazon-corretto-1.8.0_202.b08-1.amzn2.x86_64.rpm
+workspace: /tmp
 # nodesource_remote: https://rpm.nodesource.com/setup_8.x
 # nodesource_local: /tmp/ansible/files/node.sh
-
-
-workspace: /tmp
 # sonar_download_validate_certs: true
 
 # # Default release sonarqube.

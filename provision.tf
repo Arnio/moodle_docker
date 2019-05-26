@@ -35,7 +35,7 @@ resource "null_resource" remoteExecProvisionerWFolder {
 
   provisioner "file" {
     content     = "${data.template_file.app_conf.rendered}"
-    destination = "/tmp/ansible/files/config.php"
+    destination = "/tmp/ansible/kubernetes/config.php"
   }
 
   provisioner "file" {
@@ -43,25 +43,25 @@ resource "null_resource" remoteExecProvisionerWFolder {
     destination = "/tmp/ansible/files/job_moodle.xml"
   }
 
-#   provisioner "file" {
-#     content     = "${data.template_file.job_backend.rendered}"
-#     destination = "/tmp/ansible/files/job_backend.xml"
-#   }
+  provisioner "file" {
+    content     = "${data.template_file.job_moodle_ossh.rendered}"
+    destination = "/tmp/ansible/files/job_moodle_ossh.xml"
+  }
 
-#   provisioner "file" {
-#     content     = "${data.template_file.deployment_backend.rendered}"
-#     destination = "/tmp/ansible/kubernetes/deployment-backend.yml"
-#   }
+  provisioner "file" {
+    content     = "${data.template_file.deployment_moodle.rendered}"
+    destination = "/tmp/ansible/kubernetes/deployment-moodle.yml"
+  }
 
-#   provisioner "file" {
-#     content     = "${data.template_file.deployment_frontend.rendered}"
-#     destination = "/tmp/ansible/kubernetes/deployment-frontend.yml"
-#   }
+  provisioner "file" {
+    content     = "${data.template_file.docker-entrypoint.rendered}"
+    destination = "/tmp/ansible/kubernetes/docker-entrypoint.sh"
+  }
 
-#   provisioner "file" {
-#     content     = "${data.template_file.service-backend.rendered}"
-#     destination = "/tmp/ansible/kubernetes/service-backend.yml"
-#   }
+  provisioner "file" {
+    content     = "${data.template_file.service-moodle.rendered}"
+    destination = "/tmp/ansible/kubernetes/service-moodle.yml"
+  }
  }
 
 resource "null_resource" inventoryFileWeb {

@@ -3,31 +3,31 @@ kind: Deployment
 metadata:
   name: moodle-devops095-deployment
   labels:
-    app: moodle-devops095
+    app: ${app_name}
 spec:
   replicas: 2
   selector:
     matchLabels:
-      name: moodle-devops095
+      name: ${app_name}
   template:
     metadata:
       labels:
-        name: moodle-devops095
+        name: ${app_name}
     spec:
       containers:
-      - name: backend-app
-        image: gcr.io/lyrical-chassis-232614/moodle-devops095:0.0.1
+      - name: moodle-app
+        image: gcr.io/${project}/${app_name}:0.0.1
         imagePullPolicy: Always
-        readinessProbe:
-          httpGet:
+        livenessProbe:
+          httpGet: 
             path: /
-            port: 80
+            port: 80  
           initialDelaySeconds: 90
           periodSeconds: 10
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.11
         command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                  "-instances=lyrical-chassis-232614:us-central1:db-moodle-master-28b1e6c5=tcp:3306",
+                  "-instances=${project}:${region}:${sql_instans_name}=tcp:3306",
                   "-credential_file=/secrets/cloudsql/credentials.json"]
         volumeMounts:
           - name: cloudsql-instance-credentials

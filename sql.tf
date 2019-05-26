@@ -3,7 +3,7 @@ data "null_data_source" "auth_mysql_allowed_1" {
 
   inputs = {
     name  = "address-${count.index + 1}"
-    value = "${element(google_compute_global_address.my_global_address.*.address, count.index)}"
+    value = "${element(google_compute_address.my_address.*.address, count.index)}"
   }
 }
 
@@ -24,7 +24,7 @@ resource "google_sql_database_instance" "instance" {
     activation_policy = "ALWAYS"
     availability_type = "ZONAL"
     replication_type  = "SYNCHRONOUS"
-
+#    database_flags    = ["${var.database_flags}"]
     ip_configuration {
       ipv4_enabled = "true"
 

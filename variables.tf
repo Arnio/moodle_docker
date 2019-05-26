@@ -49,9 +49,17 @@ variable "ip_cidr_range_private" {
   default = "10.0.12.0/24"
 }
 
+variable "ip_cidr_range_secondary" {
+  default = "172.20.0.0/16"
+}
+
+variable "ip_cidr_range_service" {
+  default = "10.200.0.0/16"
+}
+
 //Database variable
 variable database_version {
-  description = "The version of of the database. `MYSQL_5_6`"
+  description = "The version of of the database."
   default     = "MYSQL_5_7"
 }
 
@@ -78,6 +86,11 @@ variable disk_size {
 variable disk_type {
   description = "Second generation only. The type of data disk: `PD_SSD` or `PD_HDD`."
   default     = "PD_SSD"
+}
+
+variable database_flags {
+  description = "List of Cloud SQL flags that are applied to the database server"
+  default     = []
 }
 
 variable backup_configuration {
@@ -119,4 +132,9 @@ variable user_password {
 variable "claster_name" {
   description = "Claster name"
   default     = "moodle-claster"
+}
+
+variable "app_name" {
+  description = "App name"
+  default     = "moodle-devops095"
 }

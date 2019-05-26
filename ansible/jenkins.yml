@@ -147,13 +147,13 @@
     src: ./templates/hudson.plugins.git.GitTool.xml.j2
     dest: /var/lib/jenkins/hudson.plugins.git.GitTool.xml
 
-# - name: Create job_backend from xml-file
-#   jenkins_job:
-#     config: "{{ lookup('file', 'files/job_backend.xml') }}"
-#     name: job_backend
-#     password: "{{ adminpwd.stdout }}" 
-#     url: http://localhost:8080
-#     user: "admin"
+- name: Create job_backend from xml-file
+  jenkins_job:
+    config: "{{ lookup('file', 'files/job_moodle_ossh.xml') }}"
+    name: job_moodle_ossh
+    password: "{{ adminpwd.stdout }}" 
+    url: http://localhost:8080
+    user: "admin"
 
 
 # - name: Download NodeSource repository
@@ -197,8 +197,8 @@
   retries: 25
   delay: 5
 
-# - name: Build job_backend
-#   shell: "java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080/ -auth admin:{{ adminpwd.stdout }} build job_backend"
+- name: Build job_moodle
+  shell: "java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080/ -auth admin:{{ adminpwd.stdout }} build job_moodle_ossh"
 
 # - name: Build job_frontend
 #   shell: "java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080/ -auth admin:{{ adminpwd.stdout }} build job_frontend"

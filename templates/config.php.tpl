@@ -89,7 +89,7 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 // $CFG->wwwroot   = 'http://{{ ansible_eth1.ipv4.address }}';
-$CFG->wwwroot   = '${global_address}';
+$CFG->wwwroot   = 'http://${global_address}';
 //=========================================================================
 // 3. DATA FILES LOCATION
 //=========================================================================
@@ -258,7 +258,7 @@ $CFG->admin = 'admin';
 //
 //   Redis session handler (requires redis server and redis extension):
       $CFG->session_handler_class = '\core\session\redis';
-      $CFG->session_redis_host = '10.0.0.5';
+      $CFG->session_redis_host = '${redis_host}';
       $CFG->session_redis_port = 6379;  // Optional.
       $CFG->session_redis_database = 0;  // Optional, default is db 0.
 //      $CFG->session_redis_auth = '{{ PASSWDDB }}'; // Optional, default is don't set one.
