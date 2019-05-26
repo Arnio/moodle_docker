@@ -22,21 +22,21 @@ data "template_file" "app_conf" {
   }
 }
 
-data "template_file" "job_moodle" {
-  template = "${file("${path.module}/templates/job_moodle.xml.tpl")}"
+# data "template_file" "job_moodle" {
+#   template = "${file("${path.module}/templates/job_moodle.xml.tpl")}"
 
-  vars {
-    project = "${var.project}"
+#   vars {
+#     project = "${var.project}"
 
-    #    region           = "${var.region}"
-    location         = "${var.zone}"
-    db_user          = "${var.user_name}"
-    db_pass          = "${var.user_password}"
-    sql_instans_name = "${google_sql_database_instance.instance.name}"
-    claster_name     = "${var.claster_name}"
-    app_name         = "${var.app_name}"
-  }
-}
+#     #    region           = "${var.region}"
+#     location         = "${var.zone}"
+#     db_user          = "${var.user_name}"
+#     db_pass          = "${var.user_password}"
+#     sql_instans_name = "${google_sql_database_instance.instance.name}"
+#     claster_name     = "${var.claster_name}"
+#     app_name         = "${var.app_name}"
+#   }
+# }
 
 data "template_file" "job_moodle_ossh" {
   template = "${file("${path.module}/templates/job_moodle_ossh.xml.tpl")}"

@@ -24,7 +24,22 @@ resource "google_sql_database_instance" "instance" {
     activation_policy = "ALWAYS"
     availability_type = "ZONAL"
     replication_type  = "SYNCHRONOUS"
-#    database_flags    = ["${var.database_flags}"]
+
+    database_flags {
+      name  = "character_set_server"
+      value = "utf8mb4"
+    }
+  
+    database_flags {
+      name  = "innodb_file_per_table"
+      value = "on"
+    }
+
+    database_flags {
+      name  = "max_allowed_packet"
+      value = "180000000"
+    }
+
     ip_configuration {
       ipv4_enabled = "true"
 

@@ -38,10 +38,10 @@ resource "null_resource" remoteExecProvisionerWFolder {
     destination = "/tmp/ansible/kubernetes/config.php"
   }
 
-  provisioner "file" {
-    content     = "${data.template_file.job_moodle.rendered}"
-    destination = "/tmp/ansible/files/job_moodle.xml"
-  }
+  # provisioner "file" {
+  #   content     = "${data.template_file.job_moodle.rendered}"
+  #   destination = "/tmp/ansible/files/job_moodle.xml"
+  # }
 
   provisioner "file" {
     content     = "${data.template_file.job_moodle_ossh.rendered}"

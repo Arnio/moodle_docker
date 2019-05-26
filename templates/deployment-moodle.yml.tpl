@@ -24,6 +24,11 @@ spec:
             port: 80  
           initialDelaySeconds: 90
           periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 90
+          periodSeconds: 10  
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.11
         command: ["/cloud_sql_proxy", "--dir=/cloudsql",

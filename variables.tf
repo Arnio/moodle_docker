@@ -106,12 +106,12 @@ variable db_name {
 
 variable db_charset {
   description = "The charset for the default database"
-  default     = "utf8"
+  default     = "utf8mb4"
 }
 
 variable db_collation {
   description = "The collation for the default database. Example for MySQL databases: 'utf8_general_ci', and Postgres: 'en_US.UTF8'"
-  default     = "utf8_general_ci"
+  default     = "utf8mb4_general_ci"
 }
 
 variable user_name {
