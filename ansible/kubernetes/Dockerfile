@@ -9,11 +9,10 @@ RUN yum install -y php \
         php-mbstring php-xmlrpc php-soap php-redis && \
     yum clean all
 RUN sed -i -e 's/session.save_handler = files/session.save_handler = redis/g' /etc/php.ini 
-#    sed -i -e "s+;session.save_path = \"/tmp\"+session.save_path = \"tcp://10.0.0.4:6379\"+g" /etc/php.ini
 COPY ./moodlefile /var/www/html/
 COPY ./kubernetes/config.php config.php
 
-RUN mkdir -p /var/moodledata && chown -R apache:apache /var/moodledata
+RUN mkdir -p /var/moodledata
 
 COPY ./kubernetes/docker-entrypoint.sh /
 EXPOSE 80

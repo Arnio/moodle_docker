@@ -13,11 +13,11 @@ resource "google_container_cluster" "primary" {
     services_secondary_range_name = "${google_compute_subnetwork.private_subnetwork.secondary_ip_range.1.range_name}"
   }
 
-    # Setting an empty username and password explicitly disables basic auth
-    master_auth {
-      username = ""
-      password = ""
-    }
+  # Setting an empty username and password explicitly disables basic auth
+  master_auth {
+    username = ""
+    password = ""
+  }
 }
 
 resource "google_container_node_pool" "primary_nodes" {
@@ -38,7 +38,7 @@ resource "google_container_node_pool" "primary_nodes" {
       "https://www.googleapis.com/auth/compute",
       "https://www.googleapis.com/auth/devstorage.read_only",
       "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring"
+      "https://www.googleapis.com/auth/monitoring",
     ]
   }
 }

@@ -38,11 +38,6 @@ resource "null_resource" remoteExecProvisionerWFolder {
     destination = "/tmp/ansible/kubernetes/config.php"
   }
 
-  # provisioner "file" {
-  #   content     = "${data.template_file.job_moodle.rendered}"
-  #   destination = "/tmp/ansible/files/job_moodle.xml"
-  # }
-
   provisioner "file" {
     content     = "${data.template_file.job_moodle_ossh.rendered}"
     destination = "/tmp/ansible/files/job_moodle_ossh.xml"
@@ -62,7 +57,7 @@ resource "null_resource" remoteExecProvisionerWFolder {
     content     = "${data.template_file.service-moodle.rendered}"
     destination = "/tmp/ansible/kubernetes/service-moodle.yml"
   }
- }
+}
 
 resource "null_resource" inventoryFileWeb {
   depends_on = ["null_resource.remoteExecProvisionerWFolder"]

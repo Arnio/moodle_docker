@@ -29,7 +29,7 @@ resource "google_sql_database_instance" "instance" {
       name  = "character_set_server"
       value = "utf8mb4"
     }
-  
+
     database_flags {
       name  = "innodb_file_per_table"
       value = "on"
@@ -48,33 +48,33 @@ resource "google_sql_database_instance" "instance" {
       ]
     }
 
-    # backup_configuration {
-    #   binary_log_enabled = true
-    #   enabled            = true
-    #   start_time         = "02:30" # every 2:30AM
-    # }
+    backup_configuration {
+      binary_log_enabled = true
+      enabled            = true
+      start_time         = "02:30" # every 2:30AM
+    }
   }
 }
 
-# resource "google_sql_database_instance" "instance_sql_replica" {
-#   name                 = "${var.db_instance_name}-replica-${random_id.db_name_id.hex}"
-#   region               = "${var.region}"
-#   database_version     = "${var.database_version}"
-#   master_instance_name = "${google_sql_database_instance.instance.name}"
+resource "google_sql_database_instance" "instance_sql_replica" {
+  name                 = "${var.db_instance_name}-replica-${random_id.db_name_id.hex}"
+  region               = "${var.region}"
+  database_version     = "${var.database_version}"
+  master_instance_name = "${google_sql_database_instance.instance.name}"
 
-#   replica_configuration {
-#     connect_retry_interval = "60"
-#     failover_target = true
-#   }
+  replica_configuration {
+    connect_retry_interval = "60"
+    failover_target = true
+  }
 
-#   settings {
-#     tier                   = "${var.db_tier}"
-#     disk_autoresize        = "${var.disk_autoresize}"
-#     disk_size              = "${var.disk_size}"
-#     disk_type              = "${var.disk_type}"
-#     crash_safe_replication = true
-#   }
-# }
+  settings {
+    tier                   = "${var.db_tier}"
+    disk_autoresize        = "${var.disk_autoresize}"
+    disk_size              = "${var.disk_size}"
+    disk_type              = "${var.disk_type}"
+    crash_safe_replication = true
+  }
+}
 
 resource "google_sql_database" "default" {
   name      = "${var.db_name}"

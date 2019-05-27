@@ -5,9 +5,8 @@
   tasks:
     - import_tasks: /tmp/ansible/docker.yml
     - import_tasks: /tmp/ansible/maven.yml
-    # - import_tasks: /tmp/ansible/sonarqube.yml
     - import_tasks: /tmp/ansible/jenkins.yml
-    # - import_tasks: /tmp/ansible/firewall_web.yml
-    # - import_tasks: /tmp/ansible/firewall_sonar.yml
+    - import_tasks: /tmp/ansible/firewall_web.yml
+
 
 ...
